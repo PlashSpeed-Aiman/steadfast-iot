@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <title>Vite App</title>
+  </head>
+  <body>
+    <nav style="padding: 0.75rem; background-color: black;margin-bottom: 0.55rem ;">
+      <ul>
+        <li><strong>Simple IoT Dashboard</strong></li>
+      </ul>
+      <ul>
+        <li><a href="#" role="button" id="stats">Get Stats</a></li>
+        <li><a href="#" role="button" id="connect">Connect to Websocket</a></li>
+        <li><a href="#" role="button" id="disconnect">Disconnect</a></li>
+      </ul>
+    </nav>
+    
+    <div style="display: flex; flex-direction: column;" class="container" id="app">
+      <div  id="status"></div>
+    <div style="display: flex;justify-content: center;margin-top: 1rem;" >
+      <article style="border-radius: 1rem;"><p id="messages">Waiting for messages</p></article>
+    </div>
+    <div>
+      <p id="statsResult"></p>
+    </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

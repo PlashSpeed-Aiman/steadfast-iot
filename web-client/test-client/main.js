@@ -15,7 +15,7 @@ $("#submit").on("click", function (event) {
 $("#stats").on("click", async function (event) {
   $("#statsResult").hide();
   event.preventDefault();
-  await fetch("http://localhost:8080/stats").then(
+  await fetch("http://192.168.1.6:8080/stats").then(
     (response) => {
       response.text().then((text) => {
         $("#statsResult").html(
@@ -53,14 +53,14 @@ $("#connect").on("click", async function () {
   }
   $("#status").html("<h2>Attempting Connection...</h2>");
   await delay(2000);
-  socket = new WebSocket("ws://127.0.0.1:8080/ws");
+  socket = new WebSocket("ws://192.168.1.6:8080/ws");
 
   socket.onopen = () => {
+    const message = $("#message").html;
     console.log("Successfully Connected");
-    $("#status").html("<h2>Successfully Connected</h2>");
-
+    message("<h2>Successfully Connected</h2>")
     socket.send("Hi From the Client!");
-    $("#status").html("<h2>Connected</h2>");
+    message("<h2>Connected</h2>");
   };
 
   socket.onclose = (event) => {

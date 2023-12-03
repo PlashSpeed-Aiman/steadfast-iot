@@ -4,8 +4,11 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
+	"github.com/joho/godotenv"
+	"go.bug.st/serial"
 	"log"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -14,8 +17,11 @@ const file string = "data.db"
 var ch chan string = make(chan string, 10)
 
 func main() {
-	/*	serialPort, _ := serial.Open("COM7", &serial.Mode{BaudRate: 9600})
-		defer serialPort.Close()*/
+	//read from env file
+	err := godotenv.Load()
+	fmt.Println(os.Getenv("SERIAL_PORT"))
+	serialPort, _ := serial.Open(os.Getenv("SERIAL_PORT"), &serial.Mode{BaudRate: 9600})
+	defer serialPort.Close()
 	fmt.Println("Connected to serial port")
 	//simple buffered channel
 	//read from serial
@@ -42,7 +48,7 @@ func main() {
 	r.HandleFunc("/stats", StatsHandler)
 	r.HandleFunc("/ws", WsHandler)
 	http.Handle("/", r)
-	err := http.ListenAndServe("0.0.0.0:8080", r)
+	err = http.ListenAndServe("0.0.0.0:8080", r)
 	if err != nil {
 		log.Fatalf(err.Error())
 
